@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Manzana",
+    "description": "Hola soy una Manzana",
+    "price": 100,
+    "thumbnail": "img",
+    "code": 1111,
+    "stock": 50,
+    "status": true,
+    "category": "Fruta",
+    "id": 1
+  },
+  {
+    "title": "Pera",
+    "description": "Hola soy una Pera",
+    "price": 100,
+    "thumbnail": "img",
+    "code": 1112,
+    "stock": 50,
+    "status": true,
+    "category": "Fruta",
+    "id": 2
+  },
+  {
+    "title": "Banana",
+    "description": "Hola soy una Banana",
+    "price": 100,
+    "thumbnail": "img",
+    "code": 1113,
+    "stock": 50,
+    "status": true,
+    "category": "Fruta",
+    "id": 3
+  }
+]
