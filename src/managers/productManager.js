@@ -3,8 +3,6 @@ import * as fs from 'fs'
 const archivo = './src/db/products.json'
 
 class ProductManager {
-    static id = 0;
-
 
     async readFile() {
         try {
@@ -36,7 +34,9 @@ class ProductManager {
             const products = await this.readFile()
             const idProduct = products.find((product) => product.id === id)
             if (!idProduct) {
-                return `No se encontro el producto con id: ${id}`
+                return {
+                    "error": `No se encontro el producto con id: ${id}`
+                }
             } else {
                 return idProduct
             }
@@ -89,6 +89,41 @@ class ProductManager {
             } else {
                 return console.log(`El producto ${title} ya existe`)
             }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async updateProductById(id, cambios) {
+        try {
+            const cambiosObj = cambios[0]
+            const product = await this.getProductById(id)
+            if (!product.error) {
+                const newProduct = {
+                    ...product,
+                    ...cambiosObj
+                }
+                const products = await this.getProducts()
+                const listaReducida = products.filter((prod) => prod.id != id)
+                listaReducida.push(newProduct)
+                const respuesta = await fs.promises.writeFile(archivo, JSON.stringify(listaReducida))
+                return respuesta
+            } else {
+                return product.error
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteProductById(id) {
+        try {
+            const products = await this.getProducts()
+            const newList = products.filter((prod) => prod.id != id)
+            const respuesta = await fs.promises.writeFile(archivo, JSON.stringify(newList))
+            return respuesta
 
         } catch (error) {
             console.log(error)

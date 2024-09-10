@@ -30,5 +30,26 @@ router.post('/', async (req, res) => {
     res.status(201).send(respuesta)
 })
 
+router.put('/:pid', async (req, res)=>{
+    try {
+        const id = parseInt(req.params.pid, 10)
+        const cambios = req.body
+        const resultado = await productManager.updateProductById(id, cambios)
+        res.status(201).send(resultado)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.delete('/:pid', async (req, res)=>{
+    try {
+        const id = parseInt(req.params.pid, 10)
+        const resultado = await productManager.deleteProductById(id)
+        res.status(200).send(`Producto con id: ${id} eliminado`)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 export default router
